@@ -1,12 +1,7 @@
 import mongoose from "mongoose";
+import { MongoMemoryServer } from "mongodb-memory-server";
 
 const MONGODB_URI = process.env.MONGODB_URI;
-
-if (!MONGODB_URI) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local"
-  );
-}
 
 let cached = global.mongoose;
 
@@ -24,7 +19,22 @@ async function dbConnect() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    let uri: string;
+
+    if (process.env.NODE_ENV === "production") {
+      if (!MONGODB_URI) {
+        throw new Error(
+          "Please define the MONGODB_URI environment variable for production."
+        );
+      }
+      uri = MONGODB_URI;
+    } else {
+      // In development, use the in-memory server
+      const mongod = await MongoMemoryServer.create();
+      uri = mongod.getUri();
+    }
+
+    cached.promise = mongoose.connect(uri, opts).then((mongoose) => {
       return mongoose;
     });
   }
