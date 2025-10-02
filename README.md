@@ -1,24 +1,58 @@
+# Pegasus UI
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Getting Started on Ubuntu 22.04
 
-First, run the development server:
+These instructions are for Ubuntu 22.04 ONLY.
+
+### 1. Install Node.js and pnpm
+
+First, you need to install `nvm` (Node Version Manager) to manage your Node.js versions.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ```
+
+After running the script, you may need to restart your terminal or run the following command:
+
+```bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+```
+
+Now, install the latest LTS version of Node.js:
+
+```bash
+nvm install --lts
+```
+
+Next, install `pnpm`:
+
+```bash
+npm install -g pnpm
+```
+
+### 2. Clone the Repository and Install Dependencies
+
+Clone the repository to your local machine:
+
+```bash
+git clone https://github.com/Daniel-Farmer/Pegasus-UI.git
+cd Pegasus-UI
+```
+
+Install the project dependencies using `pnpm`. This will also start the development server automatically.
+
+```bash
+pnpm install
+```
+
+### 3. Access the Application
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The page auto-updates as you edit the files.
 
 ## Learn More
 
