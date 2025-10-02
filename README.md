@@ -4,44 +4,19 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started on Ubuntu 22.04
 
-These instructions are for Ubuntu 22.04 ONLY.
+These instructions are for a fresh installation on Ubuntu 22.04.
 
-### 1. Install Dependencies
+### Automated Installation
 
-First, update your package list and install `curl` and `git`:
-
-```bash
-sudo apt update && sudo apt install curl git -y
-```
-
-### 2. Install Node.js and pnpm
-
-Now, you need to install `nvm` (Node Version Manager) to manage your Node.js versions.
+Run the following command in your terminal to download and execute the installation script. This will set up your environment by installing Node.js, pnpm, and other required dependencies.
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+bash <(curl -s https://raw.githubusercontent.com/Daniel-Farmer/Pegasus-UI/master/scripts/install_ubuntu.sh)
 ```
 
-After running the script, you may need to restart your terminal or run the following command:
+After the script finishes, **close and reopen your terminal**, then proceed to the next step.
 
-```bash
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-```
-
-Now, install the latest LTS version of Node.js:
-
-```bash
-nvm install --lts
-```
-
-Next, install `pnpm`:
-
-```bash
-npm install -g pnpm
-```
-
-### 3. Clone the Repository and Install Dependencies
+### Clone the Repository and Install Dependencies
 
 Clone the repository to your local machine:
 
@@ -50,15 +25,15 @@ git clone https://github.com/Daniel-Farmer/Pegasus-UI.git
 cd Pegasus-UI
 ```
 
-Install the project dependencies using `pnpm`. This will also start the development server automatically.
+Install the project dependencies using `pnpm`:
 
 ```bash
 pnpm install
 ```
 
-### 4. Access the Application
+### Access the Application
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The `pnpm install` command will also start the development server. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 The page auto-updates as you edit the files.
 
