@@ -7,7 +7,7 @@ export function FileManager() {
   const [activeTab, setActiveTab] = useState<'plugin' | 'server' | 'logs'>('plugin');
 
   return (
-    <aside className="w-64 bg-card border border-border shadow-sm flex flex-col">
+    <aside className="w-64 bg-card border-border shadow-sm flex flex-col h-full">
       <header className="p-2 border-b border-border">
         <h2 className="text-sm font-medium text-foreground mb-2">System Browser</h2>
         <div className="flex w-full">

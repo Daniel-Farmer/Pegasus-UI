@@ -2,15 +2,18 @@ import React from "react";
 import { EditorStatsBar } from "./editor-stats-bar";
 import { ProjectListView } from "./project-list-view";
 import { mockProjects } from "@/lib/mock-data";
+import { Project } from "@/lib/editor-interface";
 
 interface CodeEditorProps {
   display?: "filePath" | "stats";
   contentType?: "code" | "projects";
+  projects?: Project[];
 }
 
 export function CodeEditor({
   display = "filePath",
   contentType = "code",
+  projects = mockProjects,
 }: CodeEditorProps) {
   return (
     <div className="h-full flex flex-col border-r">
@@ -25,7 +28,7 @@ export function CodeEditor({
       </div>
       <div className="flex-1 p-4 bg-background">
         {contentType === "projects" ? (
-          <ProjectListView projects={mockProjects} />
+          <ProjectListView projects={projects} />
         ) : (
           <p className="text-sm font-mono text-muted-foreground">
             // Start coding...
