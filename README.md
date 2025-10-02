@@ -6,9 +6,17 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 These instructions are for Ubuntu 22.04 ONLY.
 
-### 1. Install Node.js and pnpm
+### 1. Install Dependencies
 
-First, you need to install `nvm` (Node Version Manager) to manage your Node.js versions.
+First, update your package list and install `curl` and `git`:
+
+```bash
+sudo apt update && sudo apt install curl git -y
+```
+
+### 2. Install Node.js and pnpm
+
+Now, you need to install `nvm` (Node Version Manager) to manage your Node.js versions.
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -33,7 +41,7 @@ Next, install `pnpm`:
 npm install -g pnpm
 ```
 
-### 2. Clone the Repository and Install Dependencies
+### 3. Clone the Repository and Install Dependencies
 
 Clone the repository to your local machine:
 
@@ -48,7 +56,7 @@ Install the project dependencies using `pnpm`. This will also start the developm
 pnpm install
 ```
 
-### 3. Access the Application
+### 4. Access the Application
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
