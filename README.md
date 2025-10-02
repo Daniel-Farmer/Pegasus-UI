@@ -6,6 +6,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 These instructions are for a fresh installation on Ubuntu 22.04.
 
+### Prerequisite: Install curl
+Before running the automated script, ensure `curl` is installed on your system. Most systems have it, but you can install it with the following command:
+```bash
+sudo apt update && sudo apt install curl -y
+```
+
 ### Automated Installation
 
 Run the following command in your terminal to download and execute the installation script. This will set up your environment by installing Node.js, pnpm, and other required dependencies.
