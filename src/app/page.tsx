@@ -1,103 +1,171 @@
-import Image from "next/image";
+import styles from './Home.module.css';
+import Link from 'next/link';
+import { BrainCircuit, ChevronRight, Users, User, ChevronLeft, Plus } from 'lucide-react';
+
+// Define a type for the project prop for better type safety
+type Project = {
+  name: string;
+  created: string;
+  aiUsage: number;
+  status: string;
+  statusClass: string;
+  teamSize: number;
+};
+
+// Reusable ProjectCard component
+const ProjectCard = ({ project }: { project: Project }) => (
+  <div className={styles.projectCard}>
+    <div className={styles.projectInfo}>
+      <h3 className={styles.projectName}>{project.name}</h3>
+      <p className={styles.creationDate}>Created on {project.created}</p>
+    </div>
+    <div className={styles.projectMeta}>
+      <div className={styles.projectDetails}>
+        <div className={styles.detailItem}>
+          <BrainCircuit size={16} />
+          <span>{project.aiUsage}% AI Usage</span>
+        </div>
+        <div className={styles.status}>
+          <div className={`${styles.statusIndicator} ${styles[project.statusClass]}`} />
+          <span>{project.status}</span>
+        </div>
+        <div className={styles.detailItem}>
+          <Users size={16} />
+          <span>{project.teamSize} Team Members</span>
+        </div>
+      </div>
+      <div className={styles.projectActions}>
+        <button className={styles.manageButton}>Manage</button>
+        <ChevronRight size={20} className={styles.accessIcon} />
+      </div>
+    </div>
+  </div>
+);
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const projects = [
+    { name: 'Project Alpha', created: 'Oct 2, 2025', aiUsage: 75, status: 'Live', statusClass: 'statusLive', teamSize: 5 },
+    { name: 'Project Beta', created: 'Sep 15, 2025', aiUsage: 30, status: 'In Development', statusClass: 'statusDev', teamSize: 8 },
+    { name: 'Project Gamma', created: 'Aug 1, 2025', aiUsage: 95, status: 'Archived', statusClass: 'statusArchived', teamSize: 12 },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  return (
+    <div className={styles.pageContainer}>
+      <nav className={styles.topNavbar}>
+        <div className={styles.logoText}>Pegasus Labs</div>
+        <User size={24} className={styles.profileIcon} />
+      </nav>
+      <div className={styles.subNavbar}>
+        <Link href="/" className={styles.navLink}>Dashboard</Link>
+        <Link href="/editor" className={styles.navLink}>Editor</Link>
+        <Link href="#" className={styles.navLink}>Settings</Link>
+        <Link href="#" className={styles.navLink}>Billing</Link>
+        <Link href="#" className={styles.navLink}>Integrations</Link>
+      </div>
+      <div className={styles.mainArea}>
+        <aside className={styles.aiAssistant}>
+          <div className={styles.aiHeader}>
+            <h2 className={styles.aiTitle}>AI Assistant</h2>
+          </div>
+          <div className={styles.aiMessages}>
+            {/* Messages will go here */}
+          </div>
+          <div className={styles.aiInputArea}>
+            <div className={styles.aiInputWrapper}>
+              <input
+                type="text"
+                placeholder="Type a message..."
+                className={styles.aiTextInput}
+              />
+              <button className={styles.aiSendButton}>Send</button>
+            </div>
+          </div>
+        </aside>
+        <main className={styles.mainContent}>
+          <div className={styles.contentHeader}>
+            <h2 className={styles.contentTitle}></h2>
+          </div>
+          <div className={styles.cardContainer}>
+            {projects.map(p => <ProjectCard key={p.name} project={p} />)}
+          </div>
+        </main>
+        <aside className={styles.systemBrowser}>
+          <div className={styles.browserSection}>
+            <div className={styles.systemBrowserHeader}>
+              <h2 className={styles.systemBrowserTitle}>Support Tickets</h2>
+              <div className={styles.headerIcons}>
+                <ChevronLeft size={16} />
+                <ChevronRight size={16} />
+                <Plus size={16} />
+              </div>
+            </div>
+            <div className={styles.browserContent}>
+              <div className={styles.ticketToggleContainer}>
+                <button className={`${styles.toggleButton} ${styles.toggleButtonActive}`}>Active</button>
+                <button className={styles.toggleButton}>Closed</button>
+              </div>
+              <div className={styles.ticketList}>
+                <div className={styles.ticketItem}>
+                  <div>
+                    <p className={styles.ticketId}>#TKT-001</p>
+                    <p className={styles.ticketSubject}>Server Offline</p>
+                  </div>
+                  <ChevronRight size={16} />
+                </div>
+                <div className={styles.ticketItem}>
+                  <div>
+                    <p className={styles.ticketId}>#TKT-002</p>
+                    <p className={styles.ticketSubject}>Plugin Installation Failed</p>
+                  </div>
+                  <ChevronRight size={16} />
+                </div>
+                <div className={styles.ticketItem}>
+                  <div>
+                    <p className={styles.ticketId}>#TKT-004</p>
+                    <p className={styles.ticketSubject}>Server Crashing on Start</p>
+                  </div>
+                  <ChevronRight size={16} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={styles.browserSection}>
+            <div className={styles.systemBrowserHeader}>
+              <h2 className={styles.systemBrowserTitle}>Notes & Reminders</h2>
+              <div className={styles.headerIcons}>
+                <ChevronLeft size={16} />
+                <ChevronRight size={16} />
+                <Plus size={16} />
+              </div>
+            </div>
+            <div className={styles.browserContent}>
+              <div className={styles.noteList}>
+                <div className={styles.noteItem}>
+                  <div>
+                    <p>User &apos;xX_Miner_Xx&apos; was banned for x-raying.</p>
+                    <p className={styles.noteMeta}>By Automatic Logger - Oct 3, 2025</p>
+                  </div>
+                  <ChevronRight size={16} />
+                </div>
+                <div className={styles.noteItem}>
+                  <div>
+                    <p>Player &apos;Steve&apos; purchased the Diamond Rank package.</p>
+                    <p className={styles.noteMeta}>By Automatic Logger - Oct 2, 2025</p>
+                  </div>
+                  <ChevronRight size={16} />
+                </div>
+                <div className={styles.noteItem}>
+                  <div>
+                    <p>Remember to backup the world file tonight.</p>
+                    <p className={styles.noteMeta}>By scarx - Oct 1, 2025</p>
+                  </div>
+                  <ChevronRight size={16} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
   );
 }
